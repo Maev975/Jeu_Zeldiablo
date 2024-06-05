@@ -170,6 +170,12 @@ Labyrinthe {
         }
         String actions = ACTIONS[random.nextInt(ACTIONS.length)];
         deplacerMonstre(actions);
+
+        //on test si on est a cote du monstre
+        if(this.pj.etreACote(this.monstre)){
+            this.pj.subirAttaque(1);
+            System.out.println("vie restante: " + this.pj.getVie());
+        }
     }
 
     /**
@@ -197,7 +203,7 @@ Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        return false;
+        return (this.pj.etreMort());
     }
 
     // ##################################
@@ -231,4 +237,5 @@ Labyrinthe {
     public boolean getMur(int x, int y) {
         return this.murs[x][y];
     }
+
 }

@@ -50,4 +50,6 @@ public abstract class Entite {
     public int getY() {
         return this.y;
     }
+
+
 }
