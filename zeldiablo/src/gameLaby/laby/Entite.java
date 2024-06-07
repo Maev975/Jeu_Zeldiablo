@@ -86,7 +86,7 @@ public abstract class Entite {
     public void attaquer(int d, int f, Entite e){
         if(!this.etreFreeze()) {
             e.subirAttaque(d);
-            e.setFreeze(f);
+            e.subirFreeze(f);
             System.out.println(this + " attaque: " + e + ", il reste: " + e.getVie());
         }
     }
