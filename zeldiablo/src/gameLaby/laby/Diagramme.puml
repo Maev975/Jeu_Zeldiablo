@@ -4,13 +4,22 @@ class Entite {
     protected int x
     protected int y
     int vie
+    protected int freeze
     + Entite(int dx, int dy)
     + boolean etrePresent(int dx, int dy)
     + boolean etreACote(Entite e)
     + boolean etreMort()
+    + boolean etreFreeze()
     + void subirAttaque(int degat)
+    + void attaquer(int d, int f, Entite e)
+    + void subirFreeze (int f)
     + int getX()
     + int getY()
+    + void setY(int yn)
+    + void setX(int xn)
+    + int getVie()
+    + int getFreeze()
+    + int setFreeze(int f)
 }
 
 class LabyDessin implements DessinJeu {
@@ -39,14 +48,18 @@ class Labyrinthe {
     + static final String BAS
     + static final String GAUCHE
     + static final String DROITE
+    + static final String ESPACE
     + static final String[] ACTIONS
+    public static final String[]
     public Perso pj
     public Monstre monstre
+    public List<Entite> lst_entite
     public boolean[][] murs
     - Random random
     + static int[] getSuivant(int x, int y, String action)
     + Labyrinthe(String nom)
-    + void deplacerPerso(String action)
+    + realiserEtape(String action)
+    + void deplacerEntite(String action,Entite e)
     + void deplacerMonstre(String action)
     + boolean etreFini()
     + int getLengthY()
@@ -71,6 +84,7 @@ class Perso {
 '    public boolean bas
 '    public boolean gauche
 '    public boolean droite
+'    public boolean espace
 '    + void appuyerTouche(KeyEvent event)
 '    + void relacherTouche(KeyEvent event)
 '}
