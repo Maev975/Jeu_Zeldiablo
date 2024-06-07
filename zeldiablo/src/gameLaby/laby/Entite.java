@@ -66,6 +66,13 @@ public abstract class Entite {
         return(this.vie <= 0);
     }
 
+    /**
+     * méthode êtreFreeze
+     *
+     * Renvoie true si la personne est freeze
+     *
+     * @return
+     */
     public boolean etreFreeze(){
         return(this.freeze > 0);
     }
@@ -83,6 +90,14 @@ public abstract class Entite {
             this.vie = 0;
     }
 
+    /**
+     * Methode attaque
+     * La méthode prend en paramètre les degats s, le nb de mouvement freeze et l'entite e à attaquer
+     *
+     * @param d
+     * @param f
+     * @param e
+     */
     public void attaquer(int d, int f, Entite e){
         if(!this.etreFreeze() && !this.etreMort()) {
             e.subirAttaque(d);
@@ -91,14 +106,22 @@ public abstract class Entite {
         }
     }
 
+    /**
+     * Méthode subirFreeze
+     *
+     * Inflige le freeze à l'entité
+     *
+     * @param f
+     */
+
     public void subirFreeze(int f){
         if (this.freeze < f)
             this.freeze = f;
     }
 
-    // ############################################
+    // #############################################
     // GETTER / SETTER
-    // ############################################
+    // #############################################
 
     /**
      * @return Position x de l'entité
@@ -114,22 +137,39 @@ public abstract class Entite {
         return this.y;
     }
 
+    /**
+     * Change la position x de l'entité
+     * @param xn
+     */
     public void setX(int xn){
         this.x = xn;
     }
-
+    /**
+     * Change la position y de l'entité
+     * @param yn
+     */
     public void setY(int yn){
         this.y = yn;
     }
 
+    /**
+     * @return vie de l'entité
+     */
     public int getVie(){
         return(this.vie);
     }
 
+    /**
+     * @return la valeur freeze de l'entité
+     */
     public int getFreeze(){
         return(this.freeze);
     }
 
+    /**
+     * Change la valeur freeze sur l'entité
+     * @param f
+     */
     public void setFreeze(int f){
         this.freeze = f;
     }
