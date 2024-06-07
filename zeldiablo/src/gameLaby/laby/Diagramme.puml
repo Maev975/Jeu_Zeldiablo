@@ -66,64 +66,64 @@ class Perso {
     + Perso(int dx, int dy)
 }
 
-class Clavier {
-    public boolean haut
-    public boolean bas
-    public boolean gauche
-    public boolean droite
-    + void appuyerTouche(KeyEvent event)
-    + void relacherTouche(KeyEvent event)
-}
+'class Clavier {
+'    public boolean haut
+'    public boolean bas
+'    public boolean gauche
+'    public boolean droite
+'    + void appuyerTouche(KeyEvent event)
+'    + void relacherTouche(KeyEvent event)
+'}
 
 interface DessinJeu {
     + void dessinerJeu(Jeu jeu, Canvas canvas)
 }
 
-class FrameStats {
-    private long frameCount
-    private double meanFrameInterval
-    private final ReadOnlyStringWrapper text
-    + long getFrameCount()
-    + double getMeanFrameInterval()
-    + void addFrame(long frameDurationNanos)
-    + String getText()
-    + ReadOnlyStringProperty textProperty()
-    + String toString()
-}
+'class FrameStats {
+'    private long frameCount
+'    private double meanFrameInterval
+'    private final ReadOnlyStringWrapper text
+'    + long getFrameCount()
+'    + double getMeanFrameInterval()
+'    + void addFrame(long frameDurationNanos)
+'    + String getText()
+'    + ReadOnlyStringProperty textProperty()
+'    + String toString()
+'}
 
-interface Jeu {
-    + void update(double secondes, Clavier clavier)
-    + void init()
-    + boolean etreFini()
-}
+'interface Jeu {
+'    + void update(double secondes, Clavier clavier)
+'    + void init()
+'    + boolean etreFini()
+'}
 
-class MoteurJeu {
-    private static double FPS
-    private static double dureeFPS
-    private static double WIDTH
-    private static double HEIGHT
-    private final FrameStats frameStats
-    private static Jeu jeu
-    private static DessinJeu dessin
-    Clavier controle
-    + static void launch(Jeu jeu, DessinJeu dessin)
-    + static void setFPS(int FPSSouhaitees)
-    + static void setTaille(double width, double height)
-    + void start(Stage primaryStage)
-    - void startAnimation(Canvas canvas)
-}
+'class MoteurJeu {
+'    private static double FPS
+'    private static double dureeFPS
+'    private static double WIDTH
+'    private static double HEIGHT
+'    private final FrameStats frameStats
+'    private static Jeu jeu
+'    private static DessinJeu dessin
+'    Clavier controle
+'    + static void launch(Jeu jeu, DessinJeu dessin)
+'    + static void setFPS(int FPSSouhaitees)
+'    + static void setTaille(double width, double height)
+'    + void start(Stage primaryStage)
+'    - void startAnimation(Canvas canvas)
+'}
 
 Entite <|-- Monstre
 Entite <|- Perso
 LabyJeu --> Labyrinthe
 Labyrinthe --> Perso
 Labyrinthe --> Monstre
-DessinJeu <|.. LabyDessin
-Jeu <|.. LabyJeu
-LabyJeu --> Clavier
-MoteurJeu --> FrameStats
-MoteurJeu --> Clavier
-MoteurJeu --> Jeu
-MoteurJeu --> DessinJeu
+'DessinJeu <|.. LabyDessin
+'Jeu <|.. LabyJeu
+'LabyJeu --> Clavier
+'MoteurJeu --> FrameStats
+'MoteurJeu --> Clavier
+'MoteurJeu --> Jeu
+'MoteurJeu --> DessinJeu
 
 @enduml
