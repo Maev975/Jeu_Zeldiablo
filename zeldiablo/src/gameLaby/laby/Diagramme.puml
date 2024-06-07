@@ -3,8 +3,12 @@
 class Entite {
     protected int x
     protected int y
+    int vie
     + Entite(int dx, int dy)
     + boolean etrePresent(int dx, int dy)
+    + boolean etreACote(Entite e)
+    + boolean etreMort()
+    + void subirAttaque(int degat)
     + int getX()
     + int getY()
 }
@@ -59,16 +63,7 @@ class Monstre extends Entite {
 }
 
 class Perso {
-    int x
-    int y
-    int vie
     + Perso(int dx, int dy)
-    + boolean etrePresent(int dx, int dy)
-    + boolean etreACote(Entite e)
-    + boolean etreMort()
-    + void subirAttaque(int degat)
-    + int getX()
-    + int getY()
 }
 
 class Clavier {
@@ -119,6 +114,7 @@ class MoteurJeu {
 }
 
 Entite <|-- Monstre
+Entite <|- Perso
 LabyJeu --> Labyrinthe
 Labyrinthe --> Perso
 Labyrinthe --> Monstre
