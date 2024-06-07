@@ -16,4 +16,7 @@ public class Monstre extends Entite {
         this.vie = 100;
     }
 
+    public String toString(){
+        return("Monstre");
+    }
 }

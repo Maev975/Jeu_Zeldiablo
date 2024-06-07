@@ -17,6 +17,9 @@ public class Perso extends Entite{
         this.vie = 5;
     }
 
+    public String toString(){
+        return("Perso");
+    }
 
 
 
@@ -26,9 +29,8 @@ public class Perso extends Entite{
 
 
 
-    // ############################################
-    // GETTER
-    // ############################################
+
+
 
 
 

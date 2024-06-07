@@ -3,6 +3,7 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -30,9 +31,10 @@ public class Labyrinthe {
     public static final String BAS = "Bas";
     public static final String GAUCHE = "Gauche";
     public static final String DROITE = "Droite";
+    public static final String ESPACE = "Espace";
 
     // Ajoutez les constantes pour les directions possibles
-    public static final String[] ACTIONS = {HAUT, BAS, GAUCHE, DROITE};
+    public static final String[] ACTIONS = {HAUT, BAS, GAUCHE, DROITE, ESPACE};
 
     /**
      * attributs du personnage et du monstre
@@ -166,30 +168,62 @@ public class Labyrinthe {
      * @param action une des actions possibles
      */
     public void deplacement(String action) {
-        for(Entite e : lst_entite) {
-            if(e instanceof Perso)
-                deplacerEntite(action, e);
-            else
-                deplacerEntite("", e);
+        //si notre action est un deplacement, on deplace tout le monde
+        ArrayList<String> mouv = new ArrayList<>();
+        mouv.add("Haut");
+        mouv.add("Bas");
+        mouv.add("Gauche");
+        mouv.add("Droite");
+        if(mouv.contains(action)) {
+            for (Entite e : lst_entite) {
+                if (e instanceof Perso)
+                    deplacerEntite(action, e);
+                else
+                    deplacerEntite("", e);
+            }
+        } else {
+            //si notre action est une attaque, on ne deplace personne !
+            //si c'est espace, donc une attaque. On attaque tout les monstres
+            if(action.equals("Espace")){
+                boolean attaque_vide = true;
+                for (Entite e : lst_entite) {
+                    if (e instanceof Monstre) {
+                        if(this.pj.etreACote(e)) {
+                            this.pj.attaquer(1, 1, e);
+                            attaque_vide = false;
+                        }
+                    }
+                }
+                //si on a attaque personne on se freeze
+                if(attaque_vide == true)
+                    this.pj.setFreeze(1);
+            }
         }
+
+
 
         //on fait les attaques des/du monstre(s)
         for(Entite e : lst_entite) {
             if(e instanceof Monstre)
                 if (e.etreACote(this.pj)){
                     e.attaquer(1, 0, this.pj);
-                    System.out.println("vie restante: " + this.pj.getVie());
                 }
         }
     }
 
     public void deplacerEntite(String action, Entite e) {
         if(e.etreFreeze()){
+            System.out.println(e + " est freeze pdt: " + e.getFreeze());
             e.setFreeze(e.getFreeze()-1);
             return;
         }
         if(action.equals("")){
-            action = ACTIONS[random.nextInt(ACTIONS.length)];
+            ArrayList<String> mouv = new ArrayList<>();
+            mouv.add("Haut");
+            mouv.add("Bas");
+            mouv.add("Gauche");
+            mouv.add("Droite");
+            action = mouv.get(random.nextInt(mouv.size()));
         }
         int[] courante = {e.getX(), e.getY()};
         int[] suivante = getSuivant(courante[0], courante[1], action);

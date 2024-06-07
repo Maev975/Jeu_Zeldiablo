@@ -35,6 +35,9 @@ public class LabyJeu implements Jeu {
         if (clavier.droite) {
             this.labyrinthe.deplacement(Labyrinthe.DROITE);
         }
+        if (clavier.espace) {
+            this.labyrinthe.deplacement(Labyrinthe.ESPACE);
+        }
     }
 
     @Override
