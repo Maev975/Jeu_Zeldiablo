@@ -211,6 +211,17 @@ public class Labyrinthe {
         }
     }
 
+    /**
+     * Méthode deplacerEntite
+     *
+     * Méthode deplace l'entite en prenant en paramètre une action et l'entité en question
+     * Elle verifie si l'action est possible ou nan, si il y a un mur ou si l'entité est freeze
+     *
+     * @param action
+     * @param e
+     */
+
+
     public void deplacerEntite(String action, Entite e) {
         if(e.etreFreeze()){
             System.out.println(e + " est freeze pdt: " + e.getFreeze());
