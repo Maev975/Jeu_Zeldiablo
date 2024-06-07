@@ -13,6 +13,7 @@ public class Monstre extends Entite {
      */
     public Monstre(int dx, int dy) {
         super(dx, dy);
+        this.vie = 100;
     }
 
 }

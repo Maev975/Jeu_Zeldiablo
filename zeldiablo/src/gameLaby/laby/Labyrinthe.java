@@ -3,6 +3,8 @@ package gameLaby.laby;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -11,8 +13,7 @@ import java.util.Random;
  * <ul> un personnage (x,y) </ul>
  * <ul> un monstre (x,y) </ul>
  */
-public class
-Labyrinthe {
+public class Labyrinthe {
 
     /**
      * Constantes char
@@ -38,6 +39,7 @@ Labyrinthe {
      */
     public Perso pj;
     public Monstre monstre;
+    public List<Entite> lst_entite;
 
     /**
      * les murs du labyrinthe
@@ -147,6 +149,14 @@ Labyrinthe {
         // ferme fichier
         bfRead.close();
 
+        // Initialise lst_entite après avoir initialisé pj et monstre
+        this.lst_entite = new ArrayList<>();
+        if (this.pj != null) {
+            this.lst_entite.add(this.pj);
+        }
+        if (this.monstre != null) {
+            this.lst_entite.add(this.monstre);
+        }
     }
 
     /**
@@ -155,45 +165,47 @@ Labyrinthe {
      *
      * @param action une des actions possibles
      */
-    public void deplacerPerso(String action) {
-        // case courante
-        int[] courante = {this.pj.x, this.pj.y};
-
-        // calcule case suivante
-        int[] suivante = getSuivant(courante[0], courante[1], action);
-
-        // si c'est pas un mur et pas le monstre, on effectue le deplacement
-        if (!this.murs[suivante[0]][suivante[1]] && (this.monstre.x != suivante[0] || this.monstre.y != suivante[1])) {
-            // on met a jour personnage
-            this.pj.x = suivante[0];
-            this.pj.y = suivante[1];
+    public void deplacement(String action) {
+        for(Entite e : lst_entite) {
+            if(e instanceof Perso)
+                deplacerEntite(action, e);
+            else
+                deplacerEntite("", e);
         }
-        String actions = ACTIONS[random.nextInt(ACTIONS.length)];
-        deplacerMonstre(actions);
 
-        //on test si on est a cote du monstre
-        if(this.pj.etreACote(this.monstre)){
-            this.pj.subirAttaque(1);
-            System.out.println("vie restante: " + this.pj.getVie());
+        //on fait les attaques des/du monstre(s)
+        for(Entite e : lst_entite) {
+            if(e instanceof Monstre)
+                if (e.etreACote(this.pj)){
+                    e.attaquer(1, 0, this.pj);
+                    System.out.println("vie restante: " + this.pj.getVie());
+                }
         }
     }
 
-    /**
-     * deplace le monstre en fonction de l'action.
-     * gere la collision avec les murs et le personnage
-     *
-     * @param action une des actions possibles
-     */
-    public void deplacerMonstre(String action) {
-
-        int[] courante = {this.monstre.x, this.monstre.y};
-
+    public void deplacerEntite(String action, Entite e) {
+        if(e.etreFreeze()){
+            e.setFreeze(e.getFreeze()-1);
+            return;
+        }
+        if(action.equals("")){
+            action = ACTIONS[random.nextInt(ACTIONS.length)];
+        }
+        int[] courante = {e.getX(), e.getY()};
         int[] suivante = getSuivant(courante[0], courante[1], action);
 
-
-        if (!this.murs[suivante[0]][suivante[1]] && (this.pj.x != suivante[0] || this.pj.y != suivante[1])) {
-            this.monstre.x = suivante[0];
-            this.monstre.y = suivante[1];
+        boolean possible = true;
+        if (this.murs[suivante[0]][suivante[1]])
+            possible = false;
+        for (Entite e2 : lst_entite) {
+            if (e2 != e) {
+                if (e2.getX() == suivante[0] && e2.getY() == suivante[1])
+                    possible = false;
+            }
+        }
+        if (possible) {
+            e.setX(suivante[0]);
+            e.setY(suivante[1]);
         }
     }
 
@@ -237,5 +249,4 @@ Labyrinthe {
     public boolean getMur(int x, int y) {
         return this.murs[x][y];
     }
-
 }

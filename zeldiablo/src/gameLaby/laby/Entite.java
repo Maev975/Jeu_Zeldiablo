@@ -11,6 +11,8 @@ public abstract class Entite {
      */
     protected int x, y;
     protected int vie;
+
+    protected int freeze;
     /**
      * Constructeur de l'entité
      *
@@ -20,7 +22,8 @@ public abstract class Entite {
     public Entite(int dx, int dy) {
         this.x = dx;
         this.y = dy;
-        this.vie = 100;
+        this.vie = 0;
+        this.freeze = 0;
     }
 
     /**
@@ -32,24 +35,6 @@ public abstract class Entite {
      */
     public boolean etrePresent(int dx, int dy){
         return (this.x == dx && this.y == dy);
-    }
-
-    // ############################################
-    // GETTER
-    // ############################################
-
-    /**
-     * @return Position x de l'entité
-     */
-    public int getX() {
-        return this.x;
-    }
-
-    /**
-     * @return Position y de l'entité
-     */
-    public int getY() {
-        return this.y;
     }
 
     /**
@@ -81,6 +66,10 @@ public abstract class Entite {
         return(this.vie <= 0);
     }
 
+    public boolean etreFreeze(){
+        return(this.freeze > 0);
+    }
+
     /**
      * méthode subirAttaque
      *
@@ -94,7 +83,54 @@ public abstract class Entite {
             this.vie = 0;
     }
 
+    public void attaquer(int d, int f, Entite e){
+        if(!this.etreFreeze()) {
+            e.subirAttaque(d);
+            e.setFreeze(f);
+        }
+    }
+
+    public void subirFreeze(int f){
+        if (this.freeze < f)
+            this.freeze = f;
+    }
+
+    // ############################################
+    // GETTER / SETTER
+    // ############################################
+
+    /**
+     * @return Position x de l'entité
+     */
+    public int getX() {
+        return this.x;
+    }
+
+    /**
+     * @return Position y de l'entité
+     */
+    public int getY() {
+        return this.y;
+    }
+
+    public void setX(int xn){
+        this.x = xn;
+    }
+
+    public void setY(int yn){
+        this.y = yn;
+    }
+
     public int getVie(){
         return(this.vie);
     }
+
+    public int getFreeze(){
+        return(this.freeze);
+    }
+
+    public void setFreeze(int f){
+        this.freeze = f;
+    }
+
 }
