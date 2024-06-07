@@ -167,7 +167,7 @@ public class Labyrinthe {
      *
      * @param action une des actions possibles
      */
-    public void deplacement(String action) {
+    public void realiserEtape(String action) {
         //si notre action est un deplacement, on deplace tout le monde
         ArrayList<String> mouv = new ArrayList<>();
         mouv.add("Haut");

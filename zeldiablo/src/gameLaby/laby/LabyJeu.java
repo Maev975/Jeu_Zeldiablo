@@ -24,19 +24,19 @@ public class LabyJeu implements Jeu {
     @Override
     public void update(double deltaTime, Clavier clavier) {
         if (clavier.haut) {
-            this.labyrinthe.deplacement(Labyrinthe.HAUT);
+            this.labyrinthe.realiserEtape(Labyrinthe.HAUT);
         }
         if (clavier.bas) {
-            this.labyrinthe.deplacement(Labyrinthe.BAS);
+            this.labyrinthe.realiserEtape(Labyrinthe.BAS);
         }
         if (clavier.gauche) {
-            this.labyrinthe.deplacement(Labyrinthe.GAUCHE);
+            this.labyrinthe.realiserEtape(Labyrinthe.GAUCHE);
         }
         if (clavier.droite) {
-            this.labyrinthe.deplacement(Labyrinthe.DROITE);
+            this.labyrinthe.realiserEtape(Labyrinthe.DROITE);
         }
         if (clavier.espace) {
-            this.labyrinthe.deplacement(Labyrinthe.ESPACE);
+            this.labyrinthe.realiserEtape(Labyrinthe.ESPACE);
         }
     }
 
