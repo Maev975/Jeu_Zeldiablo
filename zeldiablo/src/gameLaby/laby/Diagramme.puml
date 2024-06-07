@@ -3,7 +3,7 @@
 class Entite {
     protected int x
     protected int y
-    int vie
+    protected int vie
     protected int freeze
     + Entite(int dx, int dy)
     + boolean etrePresent(int dx, int dy)
@@ -60,7 +60,6 @@ class Labyrinthe {
     + Labyrinthe(String nom)
     + realiserEtape(String action)
     + void deplacerEntite(String action,Entite e)
-    + void deplacerMonstre(String action)
     + boolean etreFini()
     + int getLengthY()
     + int getLength()
