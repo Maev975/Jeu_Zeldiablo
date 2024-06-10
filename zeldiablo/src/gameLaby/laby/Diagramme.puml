@@ -43,9 +43,9 @@ class LabyJeu implements Jeu {
     + Labyrinthe getLabyrinthe()
 }
 
-class Main {
-    + static void main(String[] args)
-}
+'class Main {
+'    + static void main(String[] args)
+'}
 
 class Labyrinthe {
     + static final char MUR
@@ -77,9 +77,9 @@ class Labyrinthe {
     + boolean getMur(int x, int y)
 }
 
-class MainLaby {
-    + static void main(String[] args)
-}
+'class MainLaby {
+'    + static void main(String[] args)
+'}
 
 class Monstre {
     + Monstre(int dx, int dy)
