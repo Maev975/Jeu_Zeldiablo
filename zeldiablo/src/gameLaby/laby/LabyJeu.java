@@ -25,24 +25,29 @@ public class LabyJeu implements Jeu {
     public void update(double deltaTime, Clavier clavier) {
         if (clavier.haut) {
             this.labyrinthe.realiserEtape(Labyrinthe.HAUT);
+            clavier.haut = false; // Réinitialise l'indicateur après l'action
         }
         if (clavier.bas) {
             this.labyrinthe.realiserEtape(Labyrinthe.BAS);
+            clavier.bas = false; // Réinitialise l'indicateur après l'action
         }
         if (clavier.gauche) {
             this.labyrinthe.realiserEtape(Labyrinthe.GAUCHE);
+            clavier.gauche = false; // Réinitialise l'indicateur après l'action
         }
         if (clavier.droite) {
             this.labyrinthe.realiserEtape(Labyrinthe.DROITE);
+            clavier.droite = false; // Réinitialise l'indicateur après l'action
         }
         if (clavier.espace) {
             this.labyrinthe.realiserEtape(Labyrinthe.ESPACE);
+            clavier.espace = false; // Réinitialise l'indicateur après l'action
         }
     }
 
     @Override
     public void init() {
-//pas besoin
+        // pas besoin
     }
 
     @Override

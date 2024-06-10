@@ -22,6 +22,7 @@ public class Labyrinthe {
     public static final char MUR = 'X';
     public static final char PJ = 'P';
     public static final char MONSTRE = 'M';
+    public static final char AMULETTE = 'A';
     public static final char VIDE = '.';
 
     /**
@@ -41,6 +42,8 @@ public class Labyrinthe {
      */
     public Perso pj;
     public Monstre monstre;
+    public Amulette amulette;
+    public Entree entree;
     public List<Entite> lst_entite;
 
     /**
@@ -105,6 +108,8 @@ public class Labyrinthe {
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
         this.monstre = null;
+        this.amulette = null;
+        this.entree = null;
         this.random = new Random();
 
         // lecture des cases
@@ -131,12 +136,20 @@ public class Labyrinthe {
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute PJ
                         this.pj = new Perso(colonne, numeroLigne);
+                        // ajoute l'entree
+                        this.entree = new Entree(colonne, numeroLigne);
                         break;
                     case MONSTRE:
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute Monstre
                         this.monstre = new Monstre(colonne, numeroLigne);
+                        break;
+                    case AMULETTE:
+                        // pas de mur
+                        this.murs[colonne][numeroLigne] = false;
+                        // ajoute Monstre
+                        this.amulette = new Amulette(colonne, numeroLigne);
                         break;
                     default:
                         throw new Error("caractere inconnu " + c);
@@ -156,8 +169,14 @@ public class Labyrinthe {
         if (this.pj != null) {
             this.lst_entite.add(this.pj);
         }
+        if (this.entree != null) {
+            this.lst_entite.add(this.entree);
+        }
         if (this.monstre != null) {
             this.lst_entite.add(this.monstre);
+        }
+        if (this.amulette != null) {
+            this.lst_entite.add(this.amulette);
         }
     }
 
@@ -178,7 +197,7 @@ public class Labyrinthe {
             for (Entite e : lst_entite) {
                 if (e instanceof Perso)
                     deplacerEntite(action, e);
-                else
+                else if (e instanceof Monstre)
                     deplacerEntite("", e);
             }
         } else {
@@ -208,6 +227,17 @@ public class Labyrinthe {
                 if (e.etreACote(this.pj)){
                     e.attaquer(1, 0, this.pj);
                 }
+        }
+
+
+        //on verifie si on est sur l'amulette
+        if(!this.pj.avoirAmulette()) {
+            if (this.pj.etrePresent(this.amulette.getX(), this.amulette.getY())) {
+                this.pj.recupererAmulette();
+                this.lst_entite.remove(this.amulette);
+                this.amulette = null;
+                System.out.println("amulette recupéré");
+            }
         }
     }
 
@@ -243,7 +273,7 @@ public class Labyrinthe {
         if (this.murs[suivante[0]][suivante[1]])
             possible = false;
         for (Entite e2 : lst_entite) {
-            if (e2 != e) {
+            if (e2 != e && !(e2 instanceof Amulette) && !(e2 instanceof Entree)) {
                 if (e2.getX() == suivante[0] && e2.getY() == suivante[1])
                     possible = false;
             }
@@ -260,7 +290,9 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        return (this.pj.etreMort());
+        if(this.pj.etreMort() || (this.pj.avoirAmulette() && this.pj.etrePresent(this.entree.getX(), this.entree.getY())))
+            return true;
+        return false;
     }
 
     // ###################################

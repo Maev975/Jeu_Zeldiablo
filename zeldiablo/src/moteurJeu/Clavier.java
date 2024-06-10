@@ -10,6 +10,11 @@ public class Clavier {
     public boolean haut, bas, gauche, droite, espace;
 
     /**
+     * Indicateurs pour vérifier si une action a déjà été effectuée
+     */
+    private boolean hautAppuye, basAppuye, gaucheAppuye, droiteAppuye, espaceAppuye;
+
+    /**
      * stocke les commandes
      *
      * @param event evenement clavier
@@ -20,27 +25,42 @@ public class Clavier {
 
             // si touche bas
             case S:
-                this.bas = true;
+                if (!basAppuye) {
+                    this.bas = true;
+                    basAppuye = true;
+                }
                 break;
 
             // si touche haut
             case Z:
-                this.haut = true;
+                if (!hautAppuye) {
+                    this.haut = true;
+                    hautAppuye = true;
+                }
                 break;
 
             // si touche gauche
             case Q:
-                this.gauche = true;
+                if (!gaucheAppuye) {
+                    this.gauche = true;
+                    gaucheAppuye = true;
+                }
                 break;
 
             // si touche droite
             case D:
-                this.droite = true;
+                if (!droiteAppuye) {
+                    this.droite = true;
+                    droiteAppuye = true;
+                }
                 break;
 
             // si espace
             case SPACE:
-                this.espace = true;
+                if (!espaceAppuye) {
+                    this.espace = true;
+                    espaceAppuye = true;
+                }
                 break;
         }
 
@@ -58,26 +78,31 @@ public class Clavier {
             // si touche bas
             case S:
                 this.bas = false;
+                basAppuye = false;
                 break;
 
             // si touche haut
             case Z:
                 this.haut = false;
+                hautAppuye = false;
                 break;
 
             // si touche gauche
             case Q:
                 this.gauche = false;
+                gaucheAppuye = false;
                 break;
 
             // si touche droite
             case D:
                 this.droite = false;
+                droiteAppuye = false;
                 break;
 
             // si espace
             case SPACE:
                 this.espace = false;
+                espaceAppuye = false;
                 break;
         }
     }
