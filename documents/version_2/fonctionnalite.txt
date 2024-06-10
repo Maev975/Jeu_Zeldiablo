@@ -30,3 +30,20 @@
   - le monstre ne peut pas se déplacer sur mur. S'il tente de se déplacer sur cette case, il ne bouge pas.
   - le monstre ne peut pas se trouver sur la même case que le personnage.
 
+
+5. Gestion des attaques
+-Descriptif :
+   -le personnage doit pouvoir attaquer le monstre et subir des attaques de celui-ci
+-Critères de valiation :
+   -le perso et le monstre doivent pouvoir se mettre des dégâts l'un et l'autre.
+   -il doit y avoir des print pour chaques actions sauf celles de déplacement. (ex: ramassage, attaque...)
+   -(Nous n'avons pas fait 5.4 ni 5.5 car ces fonctionnalités ne convenaient pas au style de jeu visé par notre application)
+
+6. Gestion de la fin du jeu
+-Descriptif :
+   -le personnage possède 5 vies et doit récupérer une amulette et partir par la sortie avant de perdre toutes ses vies face au monstre.
+-Critères de valiation :
+   -le perso doit pouvoir mourir lorsque ses vies sont réduites a zéro
+   -le perso doit pouvoir récupérer, posséder et jeter l'amulette.
+   -le perso doit pouvoir sortir du jeu si et seulement s'il a l'amulette en sa possession.
+
