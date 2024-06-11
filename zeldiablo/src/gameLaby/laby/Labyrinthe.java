@@ -189,6 +189,8 @@ public class Labyrinthe {
         if (this.amulette != null) {
             this.lst_entite.add(this.amulette);
         }
+
+        System.out.println("niveau : " + this.niveau);
     }
     /**
      * deplace le personnage en fonction de l'action.
