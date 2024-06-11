@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 public class Test52 {
 
-    @Test
+    @org.junit.Test
     public void test_attaquer_ok() {
         Perso p = new Perso(1, 2);
         Monstre m = new Monstre(2,2);
