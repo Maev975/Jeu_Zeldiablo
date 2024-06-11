@@ -100,6 +100,13 @@ public class Labyrinthe {
         this.construireLabyrinthe(nom);
     }
 
+    /**
+     * * Méthode construireLabyrinthe
+     * Permet de construire le labyrinthe avec le nom du fichier en paramètre
+     *
+     * @param nom
+     * @throws IOException
+     */
     public void construireLabyrinthe(String nom) throws IOException{
         // ouvrir fichier
         FileReader fichier = new FileReader(nom);
@@ -308,12 +315,23 @@ public class Labyrinthe {
         return false;
     }
 
+    /**
+     * * Méthode avoirGagne
+     * Retourne un boolean qui verifie si le joueur a gagné ou non
+     * @return boolean
+     */
     public boolean avoirGagne(){
         if(this.pj.avoirAmulette() && this.pj.etrePresent(this.entree.getX(), this.entree.getY()))
             return true;
         return false;
     }
 
+    /**
+     * * Méthode changerNiveau
+     * Permet de choisir le niveau à charger
+     * @param niv
+     * @throws IOException
+     */
     public void changerNiveau(int niv) throws IOException{
         if(niv > 0 && niv < 3){
             this.niveau = niv;
