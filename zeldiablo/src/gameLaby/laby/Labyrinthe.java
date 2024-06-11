@@ -307,7 +307,7 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        if(this.avoirGagne() && this.niveau == 13)
+        if(this.avoirGagne() && this.niveau == 14)
             return true;
         return false;
     }
@@ -330,7 +330,7 @@ public class Labyrinthe {
      * @throws IOException
      */
     public void changerNiveau(int niv) throws IOException{
-        if(niv > 0 && niv < 14){
+        if(niv > 0 && niv < 15){
             this.niveau = niv;
             String re = "labySimple/laby" + niv + ".txt";
             this.construireLabyrinthe(re);

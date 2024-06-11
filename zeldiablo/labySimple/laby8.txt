@@ -2,13 +2,13 @@
 20
 XXXXXXXXXXXXXXXXXXXX
 XX...X.......X....XX
-X....X..A....X....XX
+X....X..AM...X....XX
 X..X.....X...X....XX
 X...X..XX....X...XXX
 X..X....X....X.....X
 X...X...X..X....XX.X
 X..XX.....X......X.X
-X......X..XX..X..X.X
+X.M....X..XX..X..X.X
 X..XX.....X..M....XX
 X..X....XX...X....XX
 X....X..X....X..X.XX
