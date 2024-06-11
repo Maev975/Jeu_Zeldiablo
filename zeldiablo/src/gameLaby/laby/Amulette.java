@@ -15,6 +15,11 @@ public class Amulette extends Entite {
         super(dx, dy);
     }
 
+    /**
+     * * ToString qui retourne le nom de l'entité
+     *
+     * @return String
+     */
     public String toString(){
         return("Amulette");
     }

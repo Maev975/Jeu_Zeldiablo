@@ -11,6 +11,10 @@ public class Entree extends Entite{
         super(dx, dy);
     }
 
+    /**
+     * ToString qui retourne le nom de l'entite
+     * @return String
+     */
     public String toString(){
         return("Entrée");
     }

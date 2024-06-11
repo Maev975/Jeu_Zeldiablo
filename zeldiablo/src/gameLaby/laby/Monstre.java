@@ -16,6 +16,11 @@ public class Monstre extends Entite {
         this.vie = 100;
     }
 
+    /**
+     * * ToString qui retourne le nom de l'entite
+     *
+     * @return String
+     */
     public String toString(){
         return("Monstre");
     }
