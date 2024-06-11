@@ -51,12 +51,14 @@ public class LabyDessin implements DessinJeu {
         gc.setFill(Color.RED);
         gc.fillOval(persox * TAILLE, persoy * TAILLE, TAILLE, TAILLE);
 
-        // monstre
-        if (labyrinthe.getLabyrinthe().monstre != null) {
-            double monstrex = labyrinthe.getLabyrinthe().monstre.getX();
-            double monstrey = labyrinthe.getLabyrinthe().monstre.getY();
-            gc.setFill(Color.rgb(127,0,255));
-            gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+        // monstres
+        for(Entite e : labyrinthe.getLabyrinthe().lst_entite){
+            if(e instanceof Monstre){
+                double monstrex = e.getX();
+                double monstrey = e.getY();
+                gc.setFill(Color.rgb(127,0,255));
+                gc.fillOval(monstrex * TAILLE, monstrey * TAILLE, TAILLE, TAILLE);
+            }
         }
 
         // amulette

@@ -41,7 +41,6 @@ public class Labyrinthe {
      * attributs du personnage et du monstre
      */
     public Perso pj;
-    public Monstre monstre;
     public Amulette amulette;
     public Entree entree;
     public List<Entite> lst_entite;
@@ -101,7 +100,7 @@ public class Labyrinthe {
     }
 
     /**
-     * * Méthode construireLabyrinthe
+     * Méthode construireLabyrinthe
      * Permet de construire le labyrinthe avec le nom du fichier en paramètre
      *
      * @param nom
@@ -121,7 +120,6 @@ public class Labyrinthe {
         // creation labyrinthe vide
         this.murs = new boolean[nbColonnes][nbLignes];
         this.pj = null;
-        this.monstre = null;
         this.amulette = null;
         this.entree = null;
         this.random = new Random();
@@ -131,6 +129,9 @@ public class Labyrinthe {
 
         // stocke les indices courants
         int numeroLigne = 0;
+
+        // Initialise lst_entite
+        this.lst_entite = new ArrayList<>();
 
         // parcours le fichier
         while (ligne != null) {
@@ -157,7 +158,8 @@ public class Labyrinthe {
                         // pas de mur
                         this.murs[colonne][numeroLigne] = false;
                         // ajoute Monstre
-                        this.monstre = new Monstre(colonne, numeroLigne);
+                        Monstre m = new Monstre(colonne, numeroLigne);
+                        this.lst_entite.add(m);
                         break;
                     case AMULETTE:
                         // pas de mur
@@ -178,16 +180,11 @@ public class Labyrinthe {
         // ferme fichier
         bfRead.close();
 
-        // Initialise lst_entite après avoir initialisé pj et monstre
-        this.lst_entite = new ArrayList<>();
         if (this.pj != null) {
             this.lst_entite.add(this.pj);
         }
         if (this.entree != null) {
             this.lst_entite.add(this.entree);
-        }
-        if (this.monstre != null) {
-            this.lst_entite.add(this.monstre);
         }
         if (this.amulette != null) {
             this.lst_entite.add(this.amulette);
