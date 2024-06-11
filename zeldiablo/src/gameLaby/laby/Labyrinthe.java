@@ -53,6 +53,8 @@ public class Labyrinthe {
 
     private Random random;
 
+    public int niveau;
+
     /**
      * retourne la case suivante selon une actions
      *
@@ -94,6 +96,11 @@ public class Labyrinthe {
      * @throws IOException probleme a la lecture / ouverture
      */
     public Labyrinthe(String nom) throws IOException {
+        this.niveau = 1;
+        this.construireLabyrinthe(nom);
+    }
+
+    public void construireLabyrinthe(String nom) throws IOException{
         // ouvrir fichier
         FileReader fichier = new FileReader(nom);
         BufferedReader bfRead = new BufferedReader(fichier);
@@ -179,14 +186,13 @@ public class Labyrinthe {
             this.lst_entite.add(this.amulette);
         }
     }
-
     /**
      * deplace le personnage en fonction de l'action.
      * gere la collision avec les murs et le monstre
      *
      * @param action une des actions possibles
      */
-    public void realiserEtape(String action) {
+    public void realiserEtape(String action) throws IOException {
         //si notre action est un deplacement, on deplace tout le monde
         ArrayList<String> mouv = new ArrayList<>();
         mouv.add("Haut");
@@ -239,6 +245,13 @@ public class Labyrinthe {
                 System.out.println("amulette recupéré");
             }
         }
+
+        if(this.avoirGagne()){
+            this.changerNiveau(this.niveau+1);
+        }
+        if(this.pj.etreMort()){
+            this.changerNiveau(this.niveau);
+        }
     }
 
     /**
@@ -290,9 +303,23 @@ public class Labyrinthe {
      * @return fin du jeu
      */
     public boolean etreFini() {
-        if(this.pj.etreMort() || (this.pj.avoirAmulette() && this.pj.etrePresent(this.entree.getX(), this.entree.getY())))
+        if(this.avoirGagne() && this.niveau == 2)
             return true;
         return false;
+    }
+
+    public boolean avoirGagne(){
+        if(this.pj.avoirAmulette() && this.pj.etrePresent(this.entree.getX(), this.entree.getY()))
+            return true;
+        return false;
+    }
+
+    public void changerNiveau(int niv) throws IOException{
+        if(niv > 0 && niv < 3){
+            this.niveau = niv;
+            String re = "labySimple/laby" + niv + ".txt";
+            this.construireLabyrinthe(re);
+        }
     }
 
     // ###################################

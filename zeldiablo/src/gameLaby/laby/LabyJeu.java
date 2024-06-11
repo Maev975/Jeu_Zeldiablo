@@ -22,7 +22,7 @@ public class LabyJeu implements Jeu {
     }
 
     @Override
-    public void update(double deltaTime, Clavier clavier) {
+    public void update(double deltaTime, Clavier clavier) throws IOException {
         if (clavier.haut) {
             this.labyrinthe.realiserEtape(Labyrinthe.HAUT);
             clavier.haut = false; // Réinitialise l'indicateur après l'action

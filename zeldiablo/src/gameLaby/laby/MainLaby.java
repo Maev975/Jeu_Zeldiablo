@@ -9,7 +9,7 @@ public class MainLaby {
         MoteurJeu.setFPS(15);
 
         try {
-            LabyJeu jeu = new LabyJeu("labySimple/laby2.txt");
+            LabyJeu jeu = new LabyJeu("labySimple/laby1.txt");
             MoteurJeu.setTaille( jeu.getLabyrinthe().getLength()*LabyDessin.TAILLE,  jeu.getLabyrinthe().getLengthY()*LabyDessin.TAILLE);
             LabyDessin dessin = new LabyDessin();
             MoteurJeu.launch(jeu, dessin);

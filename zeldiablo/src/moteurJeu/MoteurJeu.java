@@ -14,6 +14,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class MoteurJeu extends Application {
 
     private static double FPS = 100;
@@ -103,7 +105,11 @@ public class MoteurJeu extends Application {
                 double dureeEnMilliSecondes = elapsedTime / 1_000_000.0;
 
                 if (dureeEnMilliSecondes > dureeFPS) {
-                    jeu.update(dureeEnMilliSecondes / 1_000., controle);
+                    try {
+                        jeu.update(dureeEnMilliSecondes / 1_000., controle);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     dessin.dessinerJeu(jeu, canvas);
                     frameStats.addFrame(elapsedTime);
                     lastUpdateTime.set(timestamp);
